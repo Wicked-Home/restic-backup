@@ -1,0 +1,10 @@
+[Unit]
+# the timer, enabled as restic@your-repo.timer, will trigger
+# restic@your-repo.service
+Description=Run Restic Forget Every Hour
+
+[Timer]
+OnCalendar=*-*-* *:30:00
+
+[Install]
+WantedBy=timers.target

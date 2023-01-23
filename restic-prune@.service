@@ -1,0 +1,20 @@
+[Unit]
+# this unit can be activated with a parameter, e.g. in
+#   systemctl start restic-prune@your-repo.service
+# %i is "your-repo"
+Description=Restic prune on %i
+After=syslog.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=restic
+# runs restic backup on the files listed in /etc/restic/your-repo.files
+ExecStart=/usr/local/bin/restic prune
+# source repo and password from /etc/restic/your-repo.env
+EnvironmentFile=/etc/restic/%i.env
+AmbientCapabilities=CAP_DAC_READ_SEARCH
+
+[Install]
+WantedBy=multi-user.target
+
