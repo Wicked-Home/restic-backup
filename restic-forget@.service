@@ -8,9 +8,9 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-User=restic
+User=wix
 # runs restic backup on the files listed in /etc/restic/your-repo.files
-ExecStart=/usr/local/bin/restic forget --keep-last 20 --keep-tag keep --keep-hourly 48 --keep-daily 30 --keep-monthly 12 --keep-yearly 3
+ExecStart=/etc/restic/restic-with-swift.sh forget --keep-last 20 --keep-tag keep --keep-hourly 48 --keep-daily 30 --keep-monthly 12 --keep-yearly 3
 # source repo and password from /etc/restic/your-repo.env
 EnvironmentFile=/etc/restic/%i.env
 AmbientCapabilities=CAP_DAC_READ_SEARCH
